@@ -1,1 +1,2 @@
 PLACE 0,0,NORTH
+Move

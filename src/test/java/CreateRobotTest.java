@@ -16,36 +16,27 @@ public class CreateRobotTest {
 
 //    Test robot cannot be created due to exceed x_axis boundary.
 
-    @Test
-    public void failCreationTest_ExceedMaxX() throws InvalidPositionException{
+    @Test(expected = InvalidPositionException.class)
+    public void failCreationTest_ExceedMaxX() throws Exception {
         Position position = new Position(5, 0, Direction.NORTH);
-        Assert.assertNull(position.getxPosition());
-        Assert.assertNull(position.getyPosition());
-        Assert.assertNull(position.getDirection());
     }
 
-    @Test
-    public void failCreationTest_ExceedMinX() throws InvalidPositionException{
+//    Test robot cannot be created due to exceed x_axis boundary.
+    @Test(expected = InvalidPositionException.class)
+    public void failCreationTest_ExceedMinX() throws Exception{
         Position position = new Position(-1, 0, Direction.NORTH);
-        Assert.assertNull(position.getxPosition());
-        Assert.assertNull(position.getyPosition());
-        Assert.assertNull(position.getDirection());
     }
 
-    @Test
-    public void failCreationTest_ExceedMaxY() throws InvalidPositionException{
+//    Test robot cannot be created due to exceed y_axis boundary.
+    @Test(expected = InvalidPositionException.class)
+    public void failCreationTest_ExceedMaxY() throws Exception{
         Position position = new Position(0, 5, Direction.NORTH);
-        Assert.assertNull(position.getxPosition());
-        Assert.assertNull(position.getyPosition());
-        Assert.assertNull(position.getDirection());
     }
 
-    @Test
-    public void failCreationTest_ExceedMinY() throws InvalidPositionException{
+//    Test robot cannot be created due to exceed y_axis boundary.
+    @Test(expected = InvalidPositionException.class)
+    public void failCreationTest_ExceedMinY() throws Exception{
         Position position = new Position(0, -1, Direction.NORTH);
-        Assert.assertNull(position.getxPosition());
-        Assert.assertNull(position.getyPosition());
-        Assert.assertNull(position.getDirection());
-
     }
+    
 }

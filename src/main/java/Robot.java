@@ -5,6 +5,12 @@ public class Robot {
 
     }
 
+    public Position move() throws Exception {
+        this.position = position.updateCoordinate();
+        return position;
+
+    }
+
     public Robot(Position p){
         this.position = p;
     }
@@ -13,11 +19,11 @@ public class Robot {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(Position position) throws Exception{
         if (position != null){
             this.position = position;
         }else{
-            System.out.println("error: invalid position in entered.");
+            throw new InvalidPositionException("error: invalid position in entered.");
         }
     }
 
