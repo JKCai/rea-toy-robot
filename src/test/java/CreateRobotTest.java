@@ -38,5 +38,9 @@ public class CreateRobotTest {
     public void failCreationTest_ExceedMinY() throws Exception{
         Position position = new Position(0, -1, Direction.NORTH);
     }
-    
+
+    @Test(expected = IllegalArgumentException.class)
+    public void failCreationTest_invalidDirection() throws Exception{
+        Position position = new Position(4, 4, Direction.valueOf("REA"));
+    }
 }
