@@ -1,2 +1,1 @@
-PLACE 4,0,east
-MOVE
+report

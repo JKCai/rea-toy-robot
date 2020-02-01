@@ -14,10 +14,10 @@ public class Main {
 
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("src/in/input1.txt"));
+            reader = new BufferedReader(new FileReader("src/in/input2.txt"));
             String line = reader.readLine().toUpperCase();
             while (line != null){
-                System.out.println(line);
+//                System.out.println(line);
 //                Find the Place command
                 Integer inputIndex = line.indexOf(" ",0);
                 if (inputIndex != -1){
@@ -32,34 +32,36 @@ public class Main {
                                         Integer.parseInt(inputContent[1]),
                                         direction);
                         position = robot.getPosition();
-                        System.out.println("initial position: " + position.getxPosition() + " " +
-                                                position.getyPosition() + " " + position.getDirection());
+//                        System.out.println("initial position: " + position.getxPosition() + " " +
+//                                                position.getyPosition() + " " + position.getDirection());
 
                     }
                 }else{
                     inputCommand = line;
                     if(robot != null){
                         if (inputCommand.toUpperCase().equals("MOVE")){
-                            position = robot.move();
+                            position = command.move(robot.getPosition());
                             robot.setPosition(position);
-                            System.out.println("moved position:   " +
-                                                robot.getPosition().getxPosition() + " " +
-                                                robot.getPosition().getyPosition() + " " +
-                                                robot.getPosition().getDirection());
+//                            System.out.println("moved position:   " +
+//                                                robot.getPosition().getxPosition() + " " +
+//                                                robot.getPosition().getyPosition() + " " +
+//                                                robot.getPosition().getDirection());
                         }else if (inputCommand.toUpperCase().equals("LEFT")){
                             position = command.leftCommand(robot.getPosition());
                             robot.setPosition(position);
-                            System.out.println("turnLeft position:    " +
-                                                robot.getPosition().getxPosition() + " " +
-                                                robot.getPosition().getyPosition() + " " +
-                                                robot.getPosition().getDirection());
+//                            System.out.println("turnLeft position:    " +
+//                                                robot.getPosition().getxPosition() + " " +
+//                                                robot.getPosition().getyPosition() + " " +
+//                                                robot.getPosition().getDirection());
                         }else if(inputCommand.toUpperCase().equals("RIGHT")){
                             position = command.rightCommand(robot.getPosition());
                             robot.setPosition(position);
-                            System.out.println("turnRight position:    " +
-                                                robot.getPosition().getxPosition() + " " +
-                                                robot.getPosition().getyPosition() + " " +
-                                                robot.getPosition().getDirection());
+//                            System.out.println("turnRight position:    " +
+//                                                robot.getPosition().getxPosition() + " " +
+//                                                robot.getPosition().getyPosition() + " " +
+//                                                robot.getPosition().getDirection());
+                        }else if(inputCommand.toUpperCase().equals("REPORT")){
+                            command.reportCommand(robot);
                         }else{
                             new InvalidCommandException("error: invalid command");
                         }
