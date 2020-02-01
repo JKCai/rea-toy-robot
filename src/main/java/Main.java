@@ -14,7 +14,7 @@ public class Main {
 
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("src/in/input2.txt"));
+            reader = new BufferedReader(new FileReader("src/in/input1.txt"));
             String line = reader.readLine().toUpperCase();
             while (line != null){
 //                System.out.println(line);
@@ -61,7 +61,7 @@ public class Main {
 //                                                robot.getPosition().getyPosition() + " " +
 //                                                robot.getPosition().getDirection());
                         }else if(inputCommand.toUpperCase().equals("REPORT")){
-                            command.reportCommand(robot);
+                            System.out.println(command.reportCommand(robot));
                         }else{
                             new InvalidCommandException("error: invalid command");
                         }

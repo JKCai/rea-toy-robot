@@ -6,11 +6,33 @@ public class LeftRobotTest {
     Command command = new Command();
 
     @Test
-    public void successfulRotateLeft() throws Exception{
+    public void successfulRotateLeft_1() throws Exception{
         Position newPosition;
         Robot robot = command.place(2,2, Direction.EAST);
         newPosition = command.leftCommand(robot.getPosition());
-        Assert.assertEquals(newPosition.getDirection().toString(), "NORTH");
+        Assert.assertEquals("2", newPosition.getxPosition().toString());
+        Assert.assertEquals("2", newPosition.getyPosition().toString());
+        Assert.assertEquals("NORTH", newPosition.getDirection().toString());
+    }
+
+    @Test
+    public void successfulRotateLeft_2() throws Exception{
+        Position newPosition;
+        Robot robot = command.place(2,2, Direction.NORTH);
+        newPosition = command.leftCommand(robot.getPosition());
+        Assert.assertEquals("2", newPosition.getxPosition().toString());
+        Assert.assertEquals("2", newPosition.getyPosition().toString());
+        Assert.assertEquals("WEST", newPosition.getDirection().toString());
+    }
+
+    @Test
+    public void successfulRotateLeft_3() throws Exception{
+        Position newPosition;
+        Robot robot = command.place(2,2, Direction.SOUTH);
+        newPosition = command.leftCommand(robot.getPosition());
+        Assert.assertEquals("2", newPosition.getxPosition().toString());
+        Assert.assertEquals("2", newPosition.getyPosition().toString());
+        Assert.assertEquals("EAST", newPosition.getDirection().toString());
     }
 
     @Test(expected = InvalidPositionException.class)

@@ -51,11 +51,7 @@ public class Command {
             }
         }
 
-        try {
-            newPosition = new Position(p.getxPosition(), p.getyPosition(), p.getDirection());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        newPosition = new Position(p.getxPosition(), p.getyPosition(), p.getDirection());
 
         return newPosition;
     }
@@ -89,18 +85,16 @@ public class Command {
             }
         }
 
-        try {
-            newPosition = new Position(p.getxPosition(), p.getyPosition(), p.getDirection());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        newPosition = new Position(p.getxPosition(), p.getyPosition(), p.getDirection());
 
         return newPosition;
     }
 
-    public void reportCommand(Robot robot){
-        System.out.println(robot.getPosition().getxPosition() + " " +
-                            robot.getPosition().getyPosition() + " " +
-                            robot.getPosition().getDirection());
+    public String reportCommand(Robot robot){
+        String output = robot.getPosition().getxPosition() + " " +
+                        robot.getPosition().getyPosition() + " " +
+                        robot.getPosition().getDirection();
+
+        return output;
     }
 }
