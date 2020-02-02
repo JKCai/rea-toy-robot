@@ -44,7 +44,7 @@ public class RightRobotTest {
     public void failRotateRight_noDirection() throws Exception{
         Command c = CommandFactory.getCommand("PLACE 2,2");
         robot = c.doCommand(robot);
-        c = CommandFactory.getCommand("LEFT");
+        c = CommandFactory.getCommand("RIGHT");
         robot = c.doCommand(robot);
     }
 }
