@@ -1,7 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Position {
     private Integer xPosition;
     private Integer yPosition;
     private Direction direction;
+
+    private final Logger log = LoggerFactory.getLogger(LeftCommand.class);
 
     public Position(Integer x, Integer y, Direction direction) throws Exception{
         if (checkValidXCoordinate(x) && checkValidYCoordinate(y)){
@@ -12,7 +17,7 @@ public class Position {
         }
 
         if (!checkValidDirection(direction)){
-            throw new InvalidDirectionException("Invalid direction");
+            log.debug("Invalid direction");
         }else {
             this.direction = direction;
         }

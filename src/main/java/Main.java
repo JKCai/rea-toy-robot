@@ -1,74 +1,36 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
-
-        ArrayList<Robot> robotList = new ArrayList<Robot>();
-        Command command = new Command();
-        Position position = null;
-        String inputCommand = null;
-        String[] inputContent = null;
-
         BufferedReader reader;
+        AbstractRobot robot = null;
         try {
-            reader = new BufferedReader(new FileReader("src/in/input1.txt"));
+            Scanner inputFileNumber = new Scanner(System.in);
+            System.out.println("\nEnter 1 or 2 or 3 to choose input file:");
+            System.out.println("(NOTE: If you choose any number other than 1 to 3, the default value would be 3)");
+            String fileNum = inputFileNumber.nextLine();
+            switch (fileNum){
+                case "1":
+                    reader = new BufferedReader(new FileReader("src/in/input1.txt"));
+                    break;
+                case "2":
+                    reader = new BufferedReader(new FileReader("src/in/input2.txt"));
+                    break;
+                case "3":
+                    reader = new BufferedReader(new FileReader("src/in/input3.txt"));
+                    break;
+                default:
+                    reader = new BufferedReader(new FileReader("src/in/input3.txt"));
+            }
+
             String line = reader.readLine().toUpperCase();
             while (line != null){
-//                System.out.println(line);
-//                Find the Place command
-                Integer inputIndex = line.indexOf(" ",0);
-                if (inputIndex != -1){
-//                    Find the 'PLACE' command
-                    inputCommand = line.substring(0, inputIndex);
-                    if (inputCommand.toUpperCase().equals("PLACE")){
-                        Robot robot = null;
-//                       Get the command detail and store to an array
-                        inputContent = line.substring(inputIndex+1).split(",");
-//                        Convert direction from string to enum type
-                        Direction direction = Direction.valueOf(inputContent[2].toUpperCase());
-                        robot = command.place(Integer.parseInt(inputContent[0]),
-                                        Integer.parseInt(inputContent[1]),
-                                        direction);
-                        robotList.add(robot);
-//                        System.out.println("initial position: " + position.getxPosition() + " " +
-//                                                position.getyPosition() + " " + position.getDirection());
-
-                    }
-                }else{
-                    inputCommand = line;
-                    if(robotList != null){
-                        if (inputCommand.toUpperCase().equals("MOVE")){
-                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.move(robotList.get(robotNum-1).getPosition());
-                            }
-                        }else if (inputCommand.toUpperCase().equals("LEFT")){
-                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.leftCommand(robotList.get(robotNum-1).getPosition());
-                            }
-                        }else if(inputCommand.toUpperCase().equals("RIGHT")){
-                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.rightCommand(robotList.get(robotNum-1).getPosition());
-                            }
-                        }else if(inputCommand.toUpperCase().equals("REPORT")){
-                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                String output = command.reportCommand(robotList.get(robotNum-1));
-                                if (output != null){
-                                    System.out.println("Robot "+ robotNum + ": " + output);
-                                }else{
-                                    System.out.println("Robot" + robotNum + "cannot excute commands because of ");
-                                }
-
-                            }
-                        }else{
-                            new InvalidCommandException("error: invalid command");
-                        }
-                    }
-                }
-
+                Command c = CommandFactory.getCommand(line);
+                robot = c.doCommand(robot);
                 line = reader.readLine();
             }
             reader.close();
