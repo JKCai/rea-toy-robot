@@ -4,16 +4,22 @@ public class Command {
 
     }
 
-    public Robot place(Integer xPosition, Integer yPosition, Direction direction){
+    public Robot place(Integer xPosition, Integer yPosition, Direction direction) throws Exception{
         Position placePosition = null;
-        try {
-            placePosition = new Position(xPosition, yPosition, direction);
-        } catch (Exception e) {
-            e.printStackTrace();
+        placePosition = new Position(xPosition, yPosition, direction);
+        if (placePosition == null){
+            throw new InvalidPositionException("error: exceed bourndary");
         }
+
         Robot robot = new Robot(placePosition);
 
         return robot;
+    }
+
+    public Position move(Position p) throws Exception {
+        Position newPosition = p.updateCoordinate();
+        return newPosition;
+
     }
 
     public Position leftCommand(Position p) throws Exception{
@@ -90,5 +96,11 @@ public class Command {
         }
 
         return newPosition;
+    }
+
+    public void reportCommand(Robot robot){
+        System.out.println(robot.getPosition().getxPosition() + " " +
+                            robot.getPosition().getyPosition() + " " +
+                            robot.getPosition().getDirection());
     }
 }

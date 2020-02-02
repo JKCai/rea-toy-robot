@@ -5,12 +5,6 @@ public class Robot {
 
     }
 
-    public Position move() throws Exception {
-        this.position = position.updateCoordinate();
-        return position;
-
-    }
-
     public Robot(Position p){
         this.position = p;
     }
