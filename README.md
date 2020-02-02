@@ -122,4 +122,4 @@ PLACE 1,2,EAST<br/>
 
 The design of Test cases follow the "Boundary Test" Principle. That is, mainly testing if the robot's x and y value is within the table size; and if the direction is within the finite set.
 
-<img src="Pictures/toy-robot-coverage.jpg" width="1000" />
+<img src="https://sproutx.com.au/wp-content/uploads/2018/toy-robot-coverage.jpg" width="1000" />
