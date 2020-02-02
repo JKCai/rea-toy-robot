@@ -1,1 +1,6 @@
+move
 PLACE 0,0,NORTH
+MOve
+PLAce 2,2,East
+LEFT
+right
