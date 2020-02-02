@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         BufferedReader reader;
-        Robot robot = null;
+        AbstractRobot robot = null;
         try {
             reader = new BufferedReader(new FileReader("src/in/input1.txt"));
             String line = reader.readLine().toUpperCase();

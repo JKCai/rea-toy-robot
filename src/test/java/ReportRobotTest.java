@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class ReportRobotTest {
-    Robot robot = null;
+    AbstractRobot robot = null;
 
     @Test
     public void successfulPrintReportPlace() throws Exception{
@@ -25,6 +25,20 @@ public class ReportRobotTest {
         c = CommandFactory.getCommand("REPORT");
         robot = c.doCommand(robot);
         Assert.assertEquals("0 0 WEST", robot.getPositionString());
+    }
+
+    @Test
+    public void successfulPrintReportMove_Mannual() throws Exception{
+        Command c = CommandFactory.getCommand("PLACE 1,0,WEST");
+        robot = c.doCommand(robot);
+        c = CommandFactory.getCommand("MOVE");
+        robot = c.doCommand(robot);
+        c = CommandFactory.getCommand("REPORT");
+        robot = c.doCommand(robot);
+        Position p = robot.getPosition();
+        Assert.assertEquals("0", p.getxPosition().toString());
+        Assert.assertEquals("0", p.getxPosition().toString());
+        Assert.assertEquals("WEST", p.getDirection().toString());
     }
 
     @Test
@@ -63,4 +77,5 @@ public class ReportRobotTest {
         robot = c.doCommand(robot);
         Assert.assertEquals("2 1 WEST", robot.getPositionString());
     }
+
 }

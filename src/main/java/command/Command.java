@@ -1,3 +1,3 @@
 public abstract class Command {
-    public abstract Robot doCommand(Robot robot) throws Exception;
+    public abstract AbstractRobot doCommand(AbstractRobot robot) throws Exception;
 }

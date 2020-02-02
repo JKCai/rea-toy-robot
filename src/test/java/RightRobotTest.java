@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class RightRobotTest {
-    Robot robot = null;
+    AbstractRobot robot = null;
 
     @Test
     public void successfulRotateLeft_1() throws Exception{

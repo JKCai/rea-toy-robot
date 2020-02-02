@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class PlaceRobotTest {
 
-    Robot robot = null;
+    AbstractRobot robot = null;
 
     /*
         test one robot can be created successfully
@@ -14,7 +14,9 @@ public class PlaceRobotTest {
     @Test
     public void successfulCreationTest() throws Exception{
         Command c = CommandFactory.getCommand("PLACE 0,0,NORTH");
-        Assert.assertEquals("0 0 NORTH", c.doCommand(robot).getPositionString());
+        robot = c.doCommand(robot);
+        Assert.assertFalse(robot.isNil());
+        Assert.assertEquals("0 0 NORTH", robot.getPositionString());
     }
 
     /*
@@ -59,6 +61,20 @@ public class PlaceRobotTest {
         robot = c.doCommand(robot);
     }
 
+    @Test(expected = InvalidCommandException.class)
+    public void failCreationTest_noArugments() throws Exception{
+        Command c = CommandFactory.getCommand("PLACE");
+        robot = c.doCommand(robot);
+    }
 
+    @Test
+    public void failCreationTest_nullPosition() throws Exception{
+        Position position = null;
+        AbstractRobot robot = RobotFactory.getRobot(position);
+        robot.getPositionString();
+        robot.getPosition();
+        robot.setPosition(null);
+        Assert.assertTrue(robot.isNil());
+    }
 
 }

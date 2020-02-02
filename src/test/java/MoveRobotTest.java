@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MoveRobotTest {
-    Robot robot = null;
+    AbstractRobot robot = null;
 
     @Test
     public void successfulMoveNorthTest() throws Exception{

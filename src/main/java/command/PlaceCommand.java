@@ -14,11 +14,10 @@ public class PlaceCommand extends Command {
     }
 
     @Override
-    public Robot doCommand(Robot robot) throws Exception {
+    public AbstractRobot doCommand(AbstractRobot robot) throws Exception {
         String [] commandString = this.commandContent;
         log.debug(commandContent.toString());
-        if (commandString.length == 3 && commandString[0]!=null &&
-                commandString[1]!=null && commandString[2]!=null){
+        if (commandString.length == 3){
             placePosition = new Position(Integer.parseInt(commandString[0]),
                     Integer.parseInt(commandString[1]),
                     Direction.valueOf(commandString[2].toUpperCase()));
@@ -26,11 +25,7 @@ public class PlaceCommand extends Command {
             throw new InvalidCommandException("Invalid Command - missing argument");
         }
 
-        if (placePosition == null){
-            throw new InvalidPositionException("Exceed bourndary");
-        }else{
-            robot = new Robot(placePosition);
-        }
+        robot = RobotFactory.getRobot(placePosition);
         log.debug("robot is placed at: " + robot.getPositionString());
         return robot;
     }

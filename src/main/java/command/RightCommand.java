@@ -6,13 +6,10 @@ public class RightCommand extends Command {
     private final Logger log = LoggerFactory.getLogger(LeftCommand.class);
 
     @Override
-    public Robot doCommand(Robot robot) throws Exception {
+    public AbstractRobot doCommand(AbstractRobot robot) throws Exception {
         if(robot != null){
             Position p = robot.getPosition();
-            if(p.getDirection() == null || !p.checkValidDirection(p.getDirection())){
-                log.debug("Invalid direction - cannot execute right command");
-            }else {
-                switch (p.getDirection()) {
+            switch (p.getDirection()) {
                     case NORTH:
                         robot.setPosition(new Position(p.getxPosition(), p.getyPosition(), Direction.EAST));
                         break;
@@ -29,7 +26,7 @@ public class RightCommand extends Command {
                 log.debug("Robot success to rotate right to direction " + robot.getPosition().getDirection());
 
             }
-        }
+
         return robot;
     }
 }

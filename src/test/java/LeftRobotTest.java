@@ -2,7 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class LeftRobotTest {
-    Robot robot = null;
+    AbstractRobot robot = null;
 
     @Test
     public void successfulRotateLeft_1() throws Exception{
