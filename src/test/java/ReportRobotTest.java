@@ -1,12 +1,16 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-//import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class ReportRobotTest {
-//    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    Command command = new Command();
 
+    Command command = new Command();
+    ArrayList<Robot> robotList = new ArrayList<Robot>();
+
+    /*
+        Test report successful prints output after Place Command
+     */
     @Test
     public void successfulPrintReportPlace() throws Exception{
         Robot robot = command.place(1 ,0, Direction.WEST);
@@ -14,6 +18,9 @@ public class ReportRobotTest {
         Assert.assertEquals("1 0 WEST", output);
     }
 
+    /*
+        Test report successfully prints output after Move Command
+     */
     @Test
     public void successfulPrintReportMove() throws Exception{
         Robot robot = command.place(1 ,0, Direction.WEST);
@@ -22,6 +29,9 @@ public class ReportRobotTest {
         Assert.assertEquals("0 0 WEST", output);
     }
 
+    /*
+        Test report successfully prints output after Left Command
+     */
     @Test
     public void successfulPrintReportLeft() throws Exception{
         Robot robot = command.place(1 ,0, Direction.WEST);
@@ -30,6 +40,9 @@ public class ReportRobotTest {
         Assert.assertEquals("1 0 SOUTH", output);
     }
 
+    /*
+        Test report successfully prints output after Right Command
+     */
     @Test
     public void successfulPrintReportRight() throws Exception {
         Robot robot = command.place(1 ,0, Direction.WEST);
@@ -38,12 +51,38 @@ public class ReportRobotTest {
         Assert.assertEquals("1 0 NORTH", output);
     }
 
+    /*
+        Test report successfully prints output after All Commands
+     */
     @Test
     public void successfulPrintReportFull() throws Exception {
         Robot robot = command.place(1 ,0, Direction.WEST);
-        Position newPosition = command.move(robot.getPosition());
+        command.move(robot.getPosition());
+        command.rightCommand(robot.getPosition());
+        command.move(robot.getPosition());
+        command.leftCommand(robot.getPosition());
         String output = command.reportCommand(robot);
-        Assert.assertEquals("0 0 WEST", output);
+        Assert.assertEquals("0 1 WEST", output);
     }
 
+    @Test
+    public void successfullPrintReportFullForMultiRobots() throws Exception{
+        Robot robot1 = command.place(4,0, Direction.EAST);
+        Robot robot2 = command.place(0,4, Direction.WEST);
+        robotList.add(robot1);
+        robotList.add(robot2);
+
+        for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
+            command.leftCommand(robotList.get(robotNum-1).getPosition());
+            command.move(robotList.get(robotNum-1).getPosition());
+            command.rightCommand(robotList.get(robotNum-1).getPosition());
+        }
+
+        String robot1_position = robotList.get(0).getPositionString();
+        String robot2_position = robotList.get(1).getPositionString();
+
+        Assert.assertEquals(2, robotList.size());
+        Assert.assertEquals("4 1 EAST", robot1_position);
+        Assert.assertEquals("0 3 WEST", robot2_position);
+    }
 }

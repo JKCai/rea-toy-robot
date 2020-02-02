@@ -8,11 +8,11 @@ public class Position {
             this.xPosition = x;
             this.yPosition = y;
         }else{
-            throw new InvalidPositionException("error: exceed boundary");
+            throw new InvalidPositionException("Exceed boundary");
         }
 
         if (!checkValidDirection(direction)){
-            throw new InvalidDirectionException("error: invalid direction");
+            throw new InvalidDirectionException("Invalid direction");
         }else {
             this.direction = direction;
         }
@@ -45,61 +45,6 @@ public class Position {
         }else {
             return true;
         }
-    }
-
-//    When move command is called, update the current robot coordinate
-    public Position updateCoordinate() throws Exception{
-        Position newPosition = null;
-        if(this.direction == null || !checkValidDirection(this.direction)){
-            throw new InvalidDirectionException("error: invalid direction");
-        }else {
-            switch(this.direction){
-                /*
-                    Update the robot coordinate.
-                    But also ensure other properities do not change.
-                 */
-                case NORTH:
-                    if (checkValidYCoordinate(this.yPosition + 1)){
-                        this.yPosition = this.yPosition + 1;
-                        this.xPosition = this.xPosition;
-                        this.direction = this.direction;
-                        break;
-                    } else{
-                        throw new InvalidPositionException("error: robot cannot move due to y axis larger than " + Table.MAX_Y);
-                    }
-                case SOUTH:
-                    if (checkValidYCoordinate(this.yPosition - 1)){
-                        this.yPosition = this.yPosition - 1;
-                        this.xPosition = this.xPosition;
-                        this.direction = this.direction;
-                        break;
-                    } else{
-                        throw new InvalidPositionException("error: robot cannot move due to y axis smaller than " + Table.MIN_Y);
-                    }
-                case EAST:
-                    if (checkValidXCoordinate(this.xPosition + 1)){
-                        this.xPosition = this.xPosition + 1;
-                        this.yPosition = this.yPosition;
-                        this.direction = this.direction;
-                        break;
-                    } else{
-                        throw new InvalidPositionException("error: robot cannot move due to x axis larger than " + Table.MAX_X);
-                    }
-                case WEST:
-                    if (checkValidXCoordinate(this.xPosition - 1)){
-                        this.xPosition = this.xPosition - 1;
-                        this.yPosition = this.yPosition;
-                        this.direction = this.direction;
-                        break;
-                    } else{
-                        throw new InvalidPositionException("error: robot cannot move due to x axis smaller than "+ Table.MIN_X);
-                    }
-            }
-        }
-
-        newPosition = new Position(this.xPosition, this.yPosition, this.direction);
-
-        return newPosition;
     }
 
 
