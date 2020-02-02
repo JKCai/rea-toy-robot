@@ -18,9 +18,9 @@ public class PlaceCommand extends Command {
         String [] commandString = this.commandContent;
         log.debug(commandContent.toString());
         if (commandString.length == 3){
-            placePosition = new Position(Integer.parseInt(commandString[0]),
-                    Integer.parseInt(commandString[1]),
-                    Direction.valueOf(commandString[2].toUpperCase()));
+            placePosition = new Position(Integer.parseInt(commandString[0].trim()),
+                    Integer.parseInt(commandString[1].trim()),
+                    Direction.valueOf(commandString[2].trim().toUpperCase()));
         }else {
             throw new InvalidCommandException("Invalid Command - missing argument");
         }

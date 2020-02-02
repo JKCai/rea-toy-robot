@@ -54,18 +54,18 @@ public class ReportRobotTest {
 
     @Test
     public void successfulPrintReportRight() throws Exception {
-        Command c = CommandFactory.getCommand("PLACE 1,0,EAST");
+        Command c = CommandFactory.getCommand("PLACE 1,0,SOUTH");
         robot = c.doCommand(robot);
         c = CommandFactory.getCommand("RIGHT");
         robot = c.doCommand(robot);
         c = CommandFactory.getCommand("REPORT");
         robot = c.doCommand(robot);
-        Assert.assertEquals("1 0 SOUTH", robot.getPositionString());
+        Assert.assertEquals("1 0 WEST", robot.getPositionString());
     }
 
     @Test
     public void successfulPrintReportFull() throws Exception {
-        Command c = CommandFactory.getCommand("PLACE 2,2,WEST");
+        Command c = CommandFactory.getCommand("PLACE 2,2,SOUTH");
         robot = c.doCommand(robot);
         c = CommandFactory.getCommand("LEFT");
         robot = c.doCommand(robot);
@@ -75,7 +75,7 @@ public class ReportRobotTest {
         robot = c.doCommand(robot);
         c = CommandFactory.getCommand("REPORT");
         robot = c.doCommand(robot);
-        Assert.assertEquals("2 1 WEST", robot.getPositionString());
+        Assert.assertEquals("3 2 SOUTH", robot.getPositionString());
     }
 
 }
