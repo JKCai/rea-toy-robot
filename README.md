@@ -56,10 +56,10 @@ Create an application that can read in commands of the following (textual) form:
 2. Clone the repo to your local machine<br/>
 <i>git clone https://github.com/JKCai/rea-toy-robot.git</i> <br/><br/>
 Then change to the project directory: <br/>
-<i>cd rea-toy-robot/out/artifacts/rea_toy_robot_jar 
+<i>cd rea-toy-robot
 </i>
 
-3. run command: <br/><i>java -jar rea-toy-robot.jar</i>
+3. run command: <br/><i>java -jar out/artifacts/rea_toy_robot_jar/rea-toy-robot.jar</i>
 
 #### Project Assumption <hr>
 
