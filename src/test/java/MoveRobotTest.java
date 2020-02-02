@@ -9,9 +9,9 @@ public class MoveRobotTest {
         Position newPosition = null;
         Robot robot = command.place(0, 0, Direction.NORTH);
         newPosition = command.move(robot.getPosition());
-        Assert.assertEquals(newPosition.getxPosition().toString(), "0");
-        Assert.assertEquals(newPosition.getyPosition().toString(), "1");
-        Assert.assertEquals(newPosition.getDirection(), Direction.NORTH);
+        Assert.assertEquals("0", newPosition.getxPosition().toString());
+        Assert.assertEquals("1", newPosition.getyPosition().toString());
+        Assert.assertEquals(Direction.NORTH, newPosition.getDirection());
     }
 
     @Test(expected = InvalidPositionException.class)
@@ -25,9 +25,10 @@ public class MoveRobotTest {
         Position newPosition = null;
         Robot robot = command.place(4, 4, Direction.SOUTH);
         newPosition = command.move(robot.getPosition());
-        Assert.assertEquals(newPosition.getxPosition().toString(), "4");
-        Assert.assertEquals(newPosition.getyPosition().toString(), "3");
-        Assert.assertEquals(newPosition.getDirection(), Direction.SOUTH);
+        robot.setPosition(newPosition);
+        Assert.assertEquals("4", robot.getPosition().getxPosition().toString());
+        Assert.assertEquals("3", robot.getPosition().getyPosition().toString());
+        Assert.assertEquals(Direction.SOUTH, robot.getPosition().getDirection());
     }
 
     @Test(expected = InvalidPositionException.class)
@@ -42,9 +43,9 @@ public class MoveRobotTest {
         Position newPosition = null;
         Robot robot = command.place(4, 4, Direction.WEST);
         newPosition = command.move(robot.getPosition());
-        Assert.assertEquals(newPosition.getxPosition().toString(), "3");
-        Assert.assertEquals(newPosition.getyPosition().toString(), "4");
-        Assert.assertEquals(newPosition.getDirection(), Direction.WEST);
+        Assert.assertEquals("3", newPosition.getxPosition().toString());
+        Assert.assertEquals("4", newPosition.getyPosition().toString());
+        Assert.assertEquals(Direction.WEST, newPosition.getDirection());
     }
 
     @Test(expected = InvalidPositionException.class)
@@ -58,9 +59,9 @@ public class MoveRobotTest {
         Position newPosition = null;
         Robot robot = command.place(0, 0, Direction.EAST);
         newPosition = command.move(robot.getPosition());
-        Assert.assertEquals(newPosition.getxPosition().toString(), "1");
-        Assert.assertEquals(newPosition.getyPosition().toString(), "0");
-        Assert.assertEquals(newPosition.getDirection(), Direction.EAST);
+        Assert.assertEquals("1", newPosition.getxPosition().toString());
+        Assert.assertEquals("0", newPosition.getyPosition().toString());
+        Assert.assertEquals(Direction.EAST, newPosition.getDirection());
     }
 
     @Test(expected = InvalidPositionException.class)

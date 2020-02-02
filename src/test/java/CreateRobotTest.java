@@ -9,9 +9,9 @@ public class CreateRobotTest {
     @Test
     public void successfulCreationTest() throws Exception{
         Robot robot = command.place(0, 0, Direction.NORTH);
-        Assert.assertEquals(robot.getPosition().getxPosition().toString(), "0");
-        Assert.assertEquals(robot.getPosition().getyPosition().toString(), "0");
-        Assert.assertEquals(robot.getPosition().getDirection(), Direction.NORTH);
+        Assert.assertEquals("0", robot.getPosition().getxPosition().toString());
+        Assert.assertEquals("0", robot.getPosition().getyPosition().toString());
+        Assert.assertEquals(Direction.NORTH, robot.getPosition().getDirection());
     }
 
 //    Test robot cannot be created due to exceed x_axis boundary.

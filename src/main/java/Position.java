@@ -20,12 +20,13 @@ public class Position {
 
 //    Check if the current direction is within the options
     public boolean checkValidDirection(Direction d){
+        boolean isValid = false;
         for (Direction direction : Direction.values()) {
             if (direction.equals(d)){
-                return true;
+                isValid = true;
             }
         }
-        return false;
+        return isValid;
     }
 
 //    Check if the the X position is within the range
@@ -96,11 +97,7 @@ public class Position {
             }
         }
 
-        try {
-            newPosition = new Position(this.xPosition, this.yPosition, this.direction);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        newPosition = new Position(this.xPosition, this.yPosition, this.direction);
 
         return newPosition;
     }
