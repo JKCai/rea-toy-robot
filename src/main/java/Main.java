@@ -8,8 +8,12 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         ArrayList<Robot> robotList = new ArrayList<Robot>();
-        Command command = new Command();
-        Position position = null;
+        PlaceCommand placeCommand = new PlaceCommand();
+        MoveCommand moveCommand = new MoveCommand();
+        LeftCommand leftCommand = new LeftCommand();
+        RightCommand rightCommand = new RightCommand();
+        ReportCommand reportCommand = new ReportCommand();
+
         String inputCommand = null;
         String[] inputContent = null;
 
@@ -18,7 +22,7 @@ public class Main {
             reader = new BufferedReader(new FileReader("src/in/input1.txt"));
             String line = reader.readLine().toUpperCase();
             while (line != null){
-//                System.out.println(line);
+
 //                Find the Place command
                 Integer inputIndex = line.indexOf(" ",0);
                 if (inputIndex != -1){
@@ -30,7 +34,7 @@ public class Main {
                         inputContent = line.substring(inputIndex+1).split(",");
 //                        Convert direction from string to enum type
                         Direction direction = Direction.valueOf(inputContent[2].toUpperCase());
-                        robot = command.place(Integer.parseInt(inputContent[0]),
+                        robot = placeCommand.place(Integer.parseInt(inputContent[0]),
                                         Integer.parseInt(inputContent[1]),
                                         direction);
                         robotList.add(robot);
@@ -43,22 +47,24 @@ public class Main {
                     if(robotList != null){
                         if (inputCommand.toUpperCase().equals("MOVE")){
                             for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.move(robotList.get(robotNum-1).getPosition());
+                                moveCommand.move(robotList.get(robotNum-1).getPosition());
                             }
                         }else if (inputCommand.toUpperCase().equals("LEFT")){
                             for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.leftCommand(robotList.get(robotNum-1).getPosition());
+                                leftCommand.leftCommand(robotList.get(robotNum-1).getPosition());
                             }
                         }else if(inputCommand.toUpperCase().equals("RIGHT")){
                             for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                command.rightCommand(robotList.get(robotNum-1).getPosition());
+                                rightCommand.rightCommand(robotList.get(robotNum-1).getPosition());
                             }
                         }else if(inputCommand.toUpperCase().equals("REPORT")){
                             for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
-                                String output = command.reportCommand(robotList.get(robotNum-1));
-                                if (output != null){
+                                String output = reportCommand.reportCommand(robotList.get(robotNum-1));
+                                if (output != null && robotList.size() > 1){
                                     System.out.println("Robot "+ robotNum + ": " + output);
-                                }else{
+                                }else if(output != null && robotList.size() == 1){
+                                    System.out.println(output);
+                                }else {
                                     System.out.println("Robot" + robotNum + "cannot excute commands because of ");
                                 }
 

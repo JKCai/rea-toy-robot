@@ -1,20 +1,28 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 public class LeftRobotTest {
 
-    Command command = new Command();
+    PlaceCommand placeCommand;
+    LeftCommand leftCommand;
     ArrayList<Robot> robotList = new ArrayList<Robot>();
+
+    @Before
+    public void setUp(){
+        this.placeCommand  = new PlaceCommand();
+        this.leftCommand = new LeftCommand();
+    }
 
     /*
         Test one robot can successfully rotate from east to north
      */
     @Test
     public void successfulOneRotateLeft() throws Exception{
-        Robot robot = command.place(2,2, Direction.EAST);
-        command.leftCommand(robot.getPosition());
+        Robot robot = placeCommand.place(2,2, Direction.EAST);
+        leftCommand.leftCommand(robot.getPosition());
         Assert.assertEquals("2 2 NORTH", robot.getPositionString());
     }
 
@@ -23,12 +31,12 @@ public class LeftRobotTest {
      */
     @Test
     public void successfulRotateLeft_2() throws Exception{
-        Robot robot1 = command.place(2,2, Direction.NORTH);
-        Robot robot2 = command.place(3,3, Direction.SOUTH);
+        Robot robot1 = placeCommand.place(2,2, Direction.NORTH);
+        Robot robot2 = placeCommand.place(3,3, Direction.SOUTH);
         robotList.add(robot1);
         robotList.add(robot2);
-        command.leftCommand(robotList.get(0).getPosition());
-        command.leftCommand(robotList.get(1).getPosition());
+        leftCommand.leftCommand(robotList.get(0).getPosition());
+        leftCommand.leftCommand(robotList.get(1).getPosition());
         String robot1_position = robotList.get(0).getPositionString();
         String robot2_position = robotList.get(1).getPositionString();
 
@@ -43,8 +51,8 @@ public class LeftRobotTest {
      */
     @Test(expected = InvalidPositionException.class)
     public void failRotateLeft() throws Exception{
-        Robot robot = command.place(5,2, Direction.EAST);
-        command.leftCommand(robot.getPosition());
+        Robot robot = placeCommand.place(5,2, Direction.EAST);
+        leftCommand.leftCommand(robot.getPosition());
     }
 
     /*
@@ -52,8 +60,8 @@ public class LeftRobotTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void failRotateLeft_2() throws Exception{
-        Robot robot = command.place(5,2, Direction.valueOf("REA"));
-        command.leftCommand(robot.getPosition());
+        Robot robot = placeCommand.place(5,2, Direction.valueOf("REA"));
+        leftCommand.leftCommand(robot.getPosition());
     }
 }
 

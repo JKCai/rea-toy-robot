@@ -1,16 +1,24 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class MoveRobotTest {
-    Command command = new Command();
+    PlaceCommand placeCommand;
+    MoveCommand moveCommand;
+
+    @Before
+    public void setUp(){
+        this.placeCommand  = new PlaceCommand();
+        this.moveCommand = new MoveCommand();
+    }
 
     /*
         Test Robot successfully move to north
      */
     @Test
     public void successfulMoveNorthTest() throws Exception{
-        Robot robot = command.place(0, 0, Direction.NORTH);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(0, 0, Direction.NORTH);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
         Assert.assertEquals("0 1 NORTH", robot.getPositionString());
     }
 
@@ -19,8 +27,8 @@ public class MoveRobotTest {
      */
     @Test(expected = InvalidPositionException.class)
     public void failMoveNorthTest() throws Exception{
-        Robot robot = command.place(0, 4, Direction.NORTH);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(0, 4, Direction.NORTH);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
     }
 
     /*
@@ -28,8 +36,8 @@ public class MoveRobotTest {
      */
     @Test
     public void successfulMoveSouthTest() throws Exception{
-        Robot robot = command.place(4, 4, Direction.SOUTH);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(4, 4, Direction.SOUTH);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
         Assert.assertEquals("4 3 SOUTH", robot.getPositionString());
     }
 
@@ -38,8 +46,8 @@ public class MoveRobotTest {
      */
     @Test(expected = InvalidPositionException.class)
     public void failMoveSouthTest() throws Exception{
-        Robot robot = command.place(0, 0, Direction.SOUTH);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(0, 0, Direction.SOUTH);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
     }
 
     /*
@@ -47,8 +55,8 @@ public class MoveRobotTest {
      */
     @Test
     public void successfulMoveWestTest() throws Exception{
-        Robot robot = command.place(4, 4, Direction.WEST);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(4, 4, Direction.WEST);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
         Assert.assertEquals("3 4 WEST", robot.getPositionString());
     }
 
@@ -57,8 +65,8 @@ public class MoveRobotTest {
      */
     @Test(expected = InvalidPositionException.class)
     public void failMoveWestTest() throws Exception{
-        Robot robot = command.place(0, 0, Direction.WEST);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(0, 0, Direction.WEST);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
     }
 
     /*
@@ -66,8 +74,8 @@ public class MoveRobotTest {
      */
     @Test
     public void successfulMoveEastTest() throws Exception{
-        Robot robot = command.place(0, 0, Direction.EAST);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(0, 0, Direction.EAST);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
         Assert.assertEquals("1 0 EAST", robot.getPositionString());
     }
 
@@ -76,7 +84,7 @@ public class MoveRobotTest {
      */
     @Test(expected = InvalidPositionException.class)
     public void failMoveEastTest() throws Exception{
-        Robot robot = command.place(4, 0, Direction.EAST);
-        robot.setPosition(command.move(robot.getPosition()));
+        Robot robot = placeCommand.place(4, 0, Direction.EAST);
+        robot.setPosition(moveCommand.move(robot.getPosition()));
     }
 }
