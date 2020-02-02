@@ -1,5 +1,5 @@
 move
-PLACE 0,0,NORTH
+PLACE 0,3,NORTH
 MOve
 PLAce 2,2,East
 LEFT

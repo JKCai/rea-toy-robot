@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        Robot robot = null;
+        ArrayList<Robot> robotList = new ArrayList<Robot>();
         Command command = new Command();
         Position position = null;
         String inputCommand = null;
@@ -24,6 +25,7 @@ public class Main {
 //                    Find the 'PLACE' command
                     inputCommand = line.substring(0, inputIndex);
                     if (inputCommand.toUpperCase().equals("PLACE")){
+                        Robot robot = null;
 //                       Get the command detail and store to an array
                         inputContent = line.substring(inputIndex+1).split(",");
 //                        Convert direction from string to enum type
@@ -31,37 +33,36 @@ public class Main {
                         robot = command.place(Integer.parseInt(inputContent[0]),
                                         Integer.parseInt(inputContent[1]),
                                         direction);
-                        position = robot.getPosition();
+                        robotList.add(robot);
 //                        System.out.println("initial position: " + position.getxPosition() + " " +
 //                                                position.getyPosition() + " " + position.getDirection());
 
                     }
                 }else{
                     inputCommand = line;
-                    if(robot != null){
+                    if(robotList != null){
                         if (inputCommand.toUpperCase().equals("MOVE")){
-                            position = command.move(robot.getPosition());
-                            robot.setPosition(position);
-//                            System.out.println("moved position:   " +
-//                                                robot.getPosition().getxPosition() + " " +
-//                                                robot.getPosition().getyPosition() + " " +
-//                                                robot.getPosition().getDirection());
+                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
+                                command.move(robotList.get(robotNum-1).getPosition());
+                            }
                         }else if (inputCommand.toUpperCase().equals("LEFT")){
-                            position = command.leftCommand(robot.getPosition());
-                            robot.setPosition(position);
-//                            System.out.println("turnLeft position:    " +
-//                                                robot.getPosition().getxPosition() + " " +
-//                                                robot.getPosition().getyPosition() + " " +
-//                                                robot.getPosition().getDirection());
+                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
+                                command.leftCommand(robotList.get(robotNum-1).getPosition());
+                            }
                         }else if(inputCommand.toUpperCase().equals("RIGHT")){
-                            position = command.rightCommand(robot.getPosition());
-                            robot.setPosition(position);
-//                            System.out.println("turnRight position:    " +
-//                                                robot.getPosition().getxPosition() + " " +
-//                                                robot.getPosition().getyPosition() + " " +
-//                                                robot.getPosition().getDirection());
+                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
+                                command.rightCommand(robotList.get(robotNum-1).getPosition());
+                            }
                         }else if(inputCommand.toUpperCase().equals("REPORT")){
-                            System.out.println(command.reportCommand(robot));
+                            for(int robotNum = 1; robotNum <= robotList.size(); robotNum++){
+                                String output = command.reportCommand(robotList.get(robotNum-1));
+                                if (output != null){
+                                    System.out.println("Robot "+ robotNum + ": " + output);
+                                }else{
+                                    System.out.println("Robot" + robotNum + "cannot excute commands because of ");
+                                }
+
+                            }
                         }else{
                             new InvalidCommandException("error: invalid command");
                         }
